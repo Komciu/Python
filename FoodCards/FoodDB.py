@@ -25,6 +25,9 @@ class FoodDB:
     def loadFood(self, line):
         food = Food()
         foodParts = line.split(";")
+        for i in range(len(foodParts)):
+            if(foodParts[i] == ''):
+                foodParts[i] = '0'
         food.name = foodParts[0]
         food.kcal = float(foodParts[1])
         food.prot = float(foodParts[2])

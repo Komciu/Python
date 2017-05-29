@@ -18,6 +18,7 @@ class Meal:
 
     def summary(self):
         f = Food("Summary")
+        f.portion = 0
         for food in self.ingridients:
             f.addPortion(food)
             f.portion += food.portion
