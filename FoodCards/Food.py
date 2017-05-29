@@ -1,5 +1,5 @@
 class Food:
-    def __init__(self, name):
+    def __init__(self, name = ""):
         self.name = name
         self.kcal = 0
         self.fat = 0
@@ -13,20 +13,31 @@ class Food:
         self.portion = 100
 
     def __add__(self, other):
-        otherPortion = other.scalePortion()
-        self.kcal += otherPortion.kcal
-        self.fat += otherPortion.fat
-        self.fat_unsat_mono += otherPortion.fat_unsat_mono
-        self.fat_unsat_bi += otherPortion.fat_unsat_bi
-        self.fat_sat += otherPortion.fat_sat
-        self.prot += otherPortion.prot
-        self.carb += otherPortion.carb
-        self.carb_sugar += otherPortion.carb_sugar
-        self.fiber += otherPortion.fiber
+        self.kcal += other.kcal
+        self.fat += other.fat
+        self.fat_unsat_mono += other.fat_unsat_mono
+        self.fat_unsat_bi += other.fat_unsat_bi
+        self.fat_sat += other.fat_sat
+        self.prot += other.prot
+        self.carb += other.carb
+        self.carb_sugar += other.carb_sugar
+        self.fiber += other.fiber
         return self
 
-    def getName(self):
-        return self.name
+    def __mul__(self, multi):
+        self.kcal *= multi
+        self.fat *= multi
+        self.fat_unsat_mono *= multi
+        self.fat_unsat_bi *= multi
+        self.fat_sat *= multi
+        self.prot *= multi
+        self.carb *= multi
+        self.carb_sugar *= multi
+        self.fiber *= multi
+        return self
+
+    def addPortion(self, other):
+        self.__add__(other * (other.portion/100))
 
     def getFoodNutricion(self):
         entirePortion = self.scalePortion()

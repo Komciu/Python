@@ -2,7 +2,7 @@ import unittest
 from Food import Food
 
 class FoodTests(unittest.TestCase):
-    def test_AddTwoFoods(self):
+    def test_createFood(self):
         f1 = self.prepareFood()
         f2 = self.prepareFood()
         f3 = f1 + f2
@@ -10,6 +10,13 @@ class FoodTests(unittest.TestCase):
         self.assertEqual(f3.fat_sat, 6)
         self.assertEqual(f3.prot, 6)
         self.assertEqual(f3.fiber, 14)
+
+    def test_addEntirePortion(self):
+        f1 = Food()
+        f2 = self.prepareFood()
+        f2.portion = 200
+        f1.addPortion(f2)
+        self.assertEqual(f1.kcal, 200)
 
     def test_getFoodNutricion(self):
         f = self.prepareFood()
@@ -21,10 +28,6 @@ class FoodTests(unittest.TestCase):
         f.portion = 200
         resultWanted = ["", 200, 200, 20, 10, 4, 6, 6, 40, 10, 14]
         self.assertEqual(resultWanted, f.getFoodNutricion())
-
-    def test_nameFood(self):
-        f = Food("kurczak")
-        self.assertEqual(f.name, "kurczak")
 
     def prepareFood(self):
         f = Food("")

@@ -1,5 +1,6 @@
 from Food import Food
 from TextFormatter import TextFormatter
+from FoodDB import FoodDB
 
 class Meal:
     def __init__(self, name):
@@ -18,7 +19,7 @@ class Meal:
     def summary(self):
         f = Food("Summary")
         for food in self.ingridients:
-            f += food
+            f.addPortion(food)
             f.portion += food.portion
         return f
 
