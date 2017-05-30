@@ -1,25 +1,21 @@
 import unittest
 import os.path
-from FoodDB import FoodDB
-from Food import Food
+from FoodDB.FoodDB import FoodDB
+from Food.Food import Food
 
 class FoodDBTests(unittest.TestCase):
     def test_isFoodPresent(self):
-        fdb = FoodDB("testCsv.csv")
-        self.assertEqual(True, fdb.isPresent("Testing"))
-        self.assertEqual(True, fdb.isPresent("TeSTinG"))
+        self.assertEqual(True, self.fdb.isPresent("Testing"))
+        self.assertEqual(True, self.fdb.isPresent("TeSTinG"))
 
     def test_foodDoesNotExist(self):
-        fdb = FoodDB("testCsv.csv")
-        self.assertFalse(fdb.isPresent("test"))
+        self.assertFalse(self.fdb.isPresent("test"))
 
     def test_getNutricion(self):
-        fdb = FoodDB("testCsv.csv")
-        self.assertEqual(["Testing", 100, 1, 2, 3, 4, 5, 6, 7, 8, 9.10], fdb.getFood("testing").getFoodNutricion())
+        self.assertEqual(["Testing", 100, 1, 2, 3, 4, 5, 6, 7, 8, 9.10], self.fdb.getFood("testing").getFoodNutricion())
 
     def test_dontCrashOnLackingValues(self):
-        fdb = FoodDB("testCsv.csv")
-        self.assertEqual(1, fdb.getFood("lacking").kcal)
+        self.assertEqual(1, self.fdb.getFood("lacking").kcal)
 
     def test_createNutricionFile(self):
         fdb = FoodDB("tempFoodCsv.csv")
@@ -35,3 +31,6 @@ class FoodDBTests(unittest.TestCase):
         self.assertTrue(fdb.isPresent("addedFood"))
         self.assertTrue(fdb.isPresent("addedFood2"))
         os.remove("tempFoodCsv2.csv")
+
+    def setUp(self):
+        self.fdb = FoodDB("TestData/testCsv.csv")

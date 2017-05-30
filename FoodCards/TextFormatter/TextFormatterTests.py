@@ -1,5 +1,5 @@
 import unittest
-from TextFormatter import TextFormatter
+from TextFormatter.TextFormatter import TextFormatter
 
 
 class LineFormatterTests(unittest.TestCase):

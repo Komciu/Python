@@ -1,5 +1,5 @@
 import os.path
-from Food import Food
+from Food.Food import Food
 
 class FoodDB:
     def __init__(self, path):

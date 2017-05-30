@@ -1,6 +1,6 @@
-from Meal import Meal
-from Food import Food
-from FoodDB import FoodDB
+from Meal.Meal import Meal
+from Food.Food import Food
+from FoodDB.FoodDB import FoodDB
 
 class UI:
     def __init__(self):
@@ -19,7 +19,7 @@ class UI:
         return meal
 
     def createIngridient(self):
-        fdb = FoodDB("nutricion.csv")
+        fdb = FoodDB("Data/nutricion.csv")
         name = input("Podaj nazwe skladnika: ")
         ingr = Food(name)
         portion = int(input("Podaj rozmiar porcji: "))

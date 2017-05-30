@@ -1,6 +1,6 @@
-from Food import Food
-from TextFormatter import TextFormatter
-from FoodDB import FoodDB
+from Food.Food import Food
+from TextFormatter.TextFormatter import TextFormatter
+import os
 
 class Meal:
     def __init__(self, name):
@@ -47,7 +47,8 @@ class Meal:
         return [protPercentage, carbPercentage, fatPercentage]
 
     def saveToFile(self):
-        filePath = self.name + ".txt"
+        self.ensureDirectoryExists("Recipies")
+        filePath = "Recipies/" + self.name + ".txt"
         file = open(filePath, 'w')
 
         file.write(self.name + '\n')
@@ -66,3 +67,8 @@ class Meal:
         file.write('\n' + "% distribution:\nprot:\t" + str(distr[0]) + "\ncarb:\t" + str(distr[1]) + "\nfat: \t" + str(distr[2]))
 
         file.close()
+
+    def ensureDirectoryExists(self, name):
+        dir = os.path.dirname(name)
+        if(not os.path.exists(name)):
+            os.makedirs(name)

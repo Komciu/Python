@@ -1,5 +1,5 @@
 import unittest
-from Food import Food
+from Food.Food import Food
 
 class FoodTests(unittest.TestCase):
     def test_createFood(self):
