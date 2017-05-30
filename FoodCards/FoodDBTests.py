@@ -9,6 +9,10 @@ class FoodDBTests(unittest.TestCase):
         self.assertEqual(True, fdb.isPresent("Testing"))
         self.assertEqual(True, fdb.isPresent("TeSTinG"))
 
+    def test_foodDoesNotExist(self):
+        fdb = FoodDB("testCsv.csv")
+        self.assertFalse(fdb.isPresent("test"))
+
     def test_getNutricion(self):
         fdb = FoodDB("testCsv.csv")
         self.assertEqual(["Testing", 100, 1, 2, 3, 4, 5, 6, 7, 8, 9.10], fdb.getFood("testing").getFoodNutricion())
@@ -26,5 +30,8 @@ class FoodDBTests(unittest.TestCase):
         fdb = FoodDB("tempFoodCsv2.csv")
         food = Food("addedFood")
         fdb.addFood(food)
+        food = Food("addedFood2")
+        fdb.addFood(food)
         self.assertTrue(fdb.isPresent("addedFood"))
+        self.assertTrue(fdb.isPresent("addedFood2"))
         os.remove("tempFoodCsv2.csv")

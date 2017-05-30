@@ -20,6 +20,11 @@ class MealTests(unittest.TestCase):
         nutri = meal.getMealNutricion()
         self.assertEqual(nutri, ["Summary", 250, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
 
+    def test_nutricionPercentDistribution(self):
+        meal = self.prepareMeal()
+        nutriPercentage = meal.getNutricionPercentDistibution()
+        self.assertEqual(nutriPercentage, [33.2,52.3,14.5])
+
     def test_saveMealToFileAndCheckTitle(self):
         meal = self.prepareMeal()
         self.cleanKurczakFile()
@@ -38,7 +43,7 @@ class MealTests(unittest.TestCase):
         for line in f:
             lineCounter = lineCounter + 1
         f.close()
-        self.assertEqual(lineCounter, 8)
+        self.assertEqual(lineCounter, 13)
 
     def test_fileParameterRow(self):
         meal = self.prepareMeal()

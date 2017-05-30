@@ -7,6 +7,7 @@ class FoodDB:
         self.ensureFileExists(self.filePath)
 
     def isPresent(self, name):
+        name += ';'
         if(self.findFood(name) != None):
             return True
         else:
@@ -60,5 +61,5 @@ class FoodDB:
         foodVal = food.getFoodNutricionPer100g()
         line = "{};{};{};{};".format(foodVal[0], foodVal[2], foodVal[3], foodVal[4])
         line += "{};{};{};{};".format(foodVal[5], foodVal[6], foodVal[7], foodVal[8])
-        line += "{};{};{};".format(foodVal[9], foodVal[10], foodVal[10])
+        line += "{};{};\n".format(foodVal[9], foodVal[10])
         return line

@@ -38,6 +38,14 @@ class Meal:
                 summary.carb_sugar,
                 summary.fiber]
 
+    def getNutricionPercentDistibution(self):
+        summary = self.summary()
+        sum = summary.prot + summary.carb + summary.fat
+        protPercentage = round((summary.prot / sum)*100, 1)
+        carbPercentage = round((summary.carb / sum)*100, 1)
+        fatPercentage = round((summary.fat / sum)*100, 1)
+        return [protPercentage, carbPercentage, fatPercentage]
+
     def saveToFile(self):
         filePath = self.name + ".txt"
         file = open(filePath, 'w')
@@ -53,5 +61,8 @@ class Meal:
 
         file.write("\n" + '-'*100 + '\n')
         file.write(lf.createColumnValues(self.getMealNutricion()))
+
+        distr = self.getNutricionPercentDistibution()
+        file.write('\n' + "% distribution:\nprot:\t" + str(distr[0]) + "\ncarb:\t" + str(distr[1]) + "\nfat: \t" + str(distr[2]))
 
         file.close()
