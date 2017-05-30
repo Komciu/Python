@@ -1,8 +1,10 @@
+import os.path
 from Food import Food
 
 class FoodDB:
     def __init__(self, path):
         self.filePath = path
+        self.ensureFileExists(self.filePath)
 
     def isPresent(self, name):
         if(self.findFood(name) != None):
@@ -43,3 +45,20 @@ class FoodDB:
     def getFood(self, name):
         food = self.findFood(name)
         return food
+
+    def addFood(self, food):
+        with open(self.filePath, 'a') as file:
+            csvFoodLine = self.createDBLineFromFoodValues(food)
+            file.write(csvFoodLine)
+
+    def ensureFileExists(self, path):
+        if(not os.path.isfile(path)):
+            file = open(path, 'x')
+            file.close()
+
+    def createDBLineFromFoodValues(self, food):
+        foodVal = food.getFoodNutricionPer100g()
+        line = "{};{};{};{};".format(foodVal[0], foodVal[2], foodVal[3], foodVal[4])
+        line += "{};{};{};{};".format(foodVal[5], foodVal[6], foodVal[7], foodVal[8])
+        line += "{};{};{};".format(foodVal[9], foodVal[10], foodVal[10])
+        return line

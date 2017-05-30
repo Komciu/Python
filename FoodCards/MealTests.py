@@ -15,6 +15,11 @@ class MealTests(unittest.TestCase):
         meal = self.prepareMeal()
         self.assertEqual(700, meal.summary().kcal)
 
+    def test_mealNutricion(self):
+        meal = self.prepareMeal()
+        nutri = meal.getMealNutricion()
+        self.assertEqual(nutri, ["Summary", 250, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
+
     def test_saveMealToFileAndCheckTitle(self):
         meal = self.prepareMeal()
         self.cleanKurczakFile()
@@ -47,11 +52,6 @@ class MealTests(unittest.TestCase):
         line = f.readline()
         f.close()
         self.assertEqual(line, "                size    kcal    fat     fatS    fatUsM  fatUsB  prot    carb    carbS   fiber   \n")
-
-    def test_mealSummary(self):
-        meal = self.prepareMeal()
-        summary = meal.getMealNutricion()
-        self.assertEqual(summary, ["Summary", 350, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
 
     def prepareMeal(self):
         meal = Meal("Kurczak z ryzem")
