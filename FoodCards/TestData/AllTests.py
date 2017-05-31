@@ -1,6 +1,6 @@
 import unittest
 from Food.FoodTests import FoodTests
-from FoodDB.FoodDBTests import FoodDBTests
+from FoodDB.FoodFileSystemTests import FoodFileSystemTests
 from Meal.MealTests import MealTests
 
 if __name__ == '__main__':

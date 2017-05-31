@@ -16,40 +16,16 @@ class MealTests(unittest.TestCase):
     def test_mealNutricion(self):
         nutri = self.meal.getMealNutricion()
         self.assertEqual(nutri, ["Summary", 250, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
+        nutri = self.meal.getMealNutricion()
+        self.assertEqual(nutri, ["Summary", 250, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
 
     def test_nutricionPercentDistribution(self):
         nutriPercentage = self.meal.getNutricionPercentDistibution()
         self.assertEqual(nutriPercentage, [33.2,52.3,14.5])
 
-    def test_saveMealToFileAndCheckTitle(self):
-        self.meal.saveToFile()
-        f = open("Recipies/test_Kurczak z ryzem.txt")
-        title = f.readline()
-        f.close()
-        self.assertEqual(title, self.meal.name + '\n')
-        os.remove("Recipies/test_Kurczak z ryzem.txt")
-
-    def test_saveMealToFileAndCheckLineCount(self):
-        self.meal.saveToFile()
-        f = open("Recipies/test_Kurczak z ryzem.txt")
-        lineCounter = 0
-        for line in f:
-            lineCounter = lineCounter + 1
-        f.close()
-        self.assertEqual(lineCounter, 13)
-        os.remove("Recipies/test_Kurczak z ryzem.txt")
-
-    def test_fileParameterRow(self):
-        self.meal.saveToFile()
-
-        f = open("Recipies/test_Kurczak z ryzem.txt")
-        f.readline()
-        f.readline()
-
-        line = f.readline()
-        f.close()
-        self.assertEqual(line, "                size    kcal    fat     fatS    fatUsM  fatUsB  prot    carb    carbS   fiber   \n")
-        os.remove("Recipies/test_Kurczak z ryzem.txt")
+    def test_nutricionPer100g(self):
+        nutricionPer100g = self.meal.getNutricionPer100g()
+        self.assertEqual(nutricionPer100g, [16, 25.2, 7])
 
     def prepareMeal(self):
         meal = Meal("test_Kurczak z ryzem")
@@ -70,3 +46,4 @@ class MealTests(unittest.TestCase):
 
     def setUp(self):
         self.meal = self.prepareMeal()
+        self.kurczakPath = "Recipies/test_Kurczak z ryzem.txt"

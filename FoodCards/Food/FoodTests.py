@@ -35,6 +35,34 @@ class FoodTests(unittest.TestCase):
         resultWanted = ["", 100, 100, 3, 10, 3, 5, 2, 20, 5, 7]
         self.assertEqual(resultWanted, f.getFoodNutricionPer100g())
 
+    def test_addPortion(self):
+        f1 = self.prepareFood()
+        f2 = self.prepareFood()
+        f = Food("summary")
+        f.portion = 0
+        f.addPortion(f1)
+        self.assertEqual(f.portion, 100)
+        self.assertEqual(f.kcal, 100)
+        self.assertEqual(f.carb, 20)
+
+    def test_add2Portions(self):
+        f1 = self.prepareFood()
+        f2 = self.prepareFood()
+        f = Food("summary")
+        f.portion = 0
+        f.addPortion(f1)
+        f.addPortion(f2)
+        self.assertEqual(f.portion, 200)
+        self.assertEqual(f.kcal, 200)
+        self.assertEqual(f.carb, 40)
+        self.assertEqual(f1.portion, 100)
+        self.assertEqual(f1.kcal, 100)
+        self.assertEqual(f1.carb, 20)
+        self.assertEqual(f2.portion, 100)
+        self.assertEqual(f2.kcal, 100)
+        self.assertEqual(f2.carb, 20)
+
+
     def prepareFood(self):
         f = Food("")
         f.kcal = 100

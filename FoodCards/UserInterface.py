@@ -1,6 +1,6 @@
 from Meal.Meal import Meal
 from Food.Food import Food
-from FoodDB.FoodDB import FoodDB
+from FoodDB.FoodFileSystem import FoodFileSystem
 
 class UI:
     def __init__(self):
@@ -8,10 +8,11 @@ class UI:
 
     def start(self):
         meal = self.createMeal()
+        self.fdb = FoodFileSystem("Data/nutricion.csv")
         meal.addFood(self.createIngridient())
         while(input("Starczy?") != ('tak' or 't')):
             meal.addFood(self.createIngridient())
-        meal.saveToFile()
+        self.fdb.saveToFile(meal)
 
     def createMeal(self):
         name = input("Podaj nazwe posilku: ")
@@ -19,13 +20,12 @@ class UI:
         return meal
 
     def createIngridient(self):
-        fdb = FoodDB("Data/nutricion.csv")
         name = input("Podaj nazwe skladnika: ")
         ingr = Food(name)
         portion = int(input("Podaj rozmiar porcji: "))
         ingr.portion = portion
-        if(fdb.isPresent(name)):
-            ingr = fdb.findFood(name)
+        if(self.fdb.isPresent(name)):
+            ingr = self.fdb.findFood(name)
             ingr.portion = portion
         else:
             kcal = self.safeFloatInput("Podaj ilosc kilokalorii: ")
@@ -46,7 +46,7 @@ class UI:
             ingr.carb_sugar = carbS
             fiber = self.safeFloatInput("Podaj ilosc blonnika: ")
             ingr.fiber = fiber
-            fdb.addFood(ingr)
+            self.fdb.addFood(ingr)
         return ingr
 
     def safeFloatInput(self, txt):

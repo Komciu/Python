@@ -1,5 +1,4 @@
 from Food.Food import Food
-from TextFormatter.TextFormatter import TextFormatter
 import os
 
 class Meal:
@@ -21,7 +20,6 @@ class Meal:
         f.portion = 0
         for food in self.ingridients:
             f.addPortion(food)
-            f.portion += food.portion
         return f
 
     def getMealNutricion(self):
@@ -46,29 +44,10 @@ class Meal:
         fatPercentage = round((summary.fat / sum)*100, 1)
         return [protPercentage, carbPercentage, fatPercentage]
 
-    def saveToFile(self):
-        self.ensureDirectoryExists("Recipies")
-        filePath = "Recipies/" + self.name + ".txt"
-        file = open(filePath, 'w')
-
-        file.write(self.name + '\n')
-        file.write(' \n')
-        lf = TextFormatter(8)
-        columnNames = ["size", "kcal", "fat", "fatS", "fatUsM", "fatUsB", "prot", "carb", "carbS", "fiber"]
-        line = lf.createColumnNames(columnNames)
-        file.write(line)
-        for ingr in self.ingridients:
-            file.write(lf.createColumnValues(ingr.getFoodNutricion()))
-
-        file.write("\n" + '-'*100 + '\n')
-        file.write(lf.createColumnValues(self.getMealNutricion()))
-
-        distr = self.getNutricionPercentDistibution()
-        file.write('\n' + "% distribution:\nprot:\t" + str(distr[0]) + "\ncarb:\t" + str(distr[1]) + "\nfat: \t" + str(distr[2]))
-
-        file.close()
-
-    def ensureDirectoryExists(self, name):
-        dir = os.path.dirname(name)
-        if(not os.path.exists(name)):
-            os.makedirs(name)
+    def getNutricionPer100g(self):
+        summary = self.summary()
+        sum = summary.prot + summary.carb + summary.fat
+        protPer100g = round((summary.prot / (summary.portion/100)), 1)
+        carbPer100g = round((summary.carb / (summary.portion/100)), 1)
+        fatPerc100g = round((summary.fat / (summary.portion/100)), 1)
+        return [protPer100g, carbPer100g, fatPerc100g]

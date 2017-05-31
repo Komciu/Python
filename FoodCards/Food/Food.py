@@ -37,7 +37,8 @@ class Food:
         return self
 
     def addPortion(self, other):
-        self.__add__(other * (other.portion/100))
+        self.__add__(other.scalePortion())
+        self.portion += other.portion
 
     def getFoodNutricion(self):
         entirePortion = self.scalePortion()
