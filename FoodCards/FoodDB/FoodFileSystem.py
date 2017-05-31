@@ -74,7 +74,7 @@ class FoodFileSystem:
         file.write('\n' + "% distribution:\nprot:\t" + str(distr[0]) + "\ncarb:\t" + str(distr[1]) + "\nfat: \t" + str(distr[2]) + '\n')
 
         nutriPer100g = meal.getNutricionPer100g()
-        file.write('\n' + "% Nutri in 100g:\nprot:\t" + str(nutriPer100g[0]) + "g\ncarb:\t" + str(nutriPer100g[1]) + "g\nfat: \t" + str(nutriPer100g[2]) +'g\n')
+        file.write('\n' + "Nutri in 100g:\nprot:\t" + str(nutriPer100g[0]) + "g\ncarb:\t" + str(nutriPer100g[1]) + "g\nfat: \t" + str(nutriPer100g[2]) +'g\n')
 
         file.close()
 
