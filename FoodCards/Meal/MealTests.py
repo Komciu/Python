@@ -3,6 +3,7 @@ import os
 from Meal.Meal import Meal
 from Food.Food import Food
 
+
 class MealTests(unittest.TestCase):
     def test_createMeal(self):
         self.assertEqual(self.meal.name, "test_Kurczak z ryzem")
@@ -15,9 +16,13 @@ class MealTests(unittest.TestCase):
 
     def test_mealNutricion(self):
         nutri = self.meal.getMealNutricion()
-        self.assertEqual(nutri, ["Summary", 250, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
+        self.assertEqual(nutri, ["Summary", 250, 700, 40, 17.5, 0, 0, 0, 63, 0, 0])
+
+    def test_mealNutricionDoubleSummaryNotAddingUp(self):
         nutri = self.meal.getMealNutricion()
-        self.assertEqual(nutri, ["Summary", 250, 700, 17.5, 0, 0, 0, 40, 63, 0, 0])
+        self.assertEqual(nutri, ["Summary", 250, 700, 40, 17.5, 0, 0, 0, 63, 0, 0])
+        nutri = self.meal.getMealNutricion()
+        self.assertEqual(nutri, ["Summary", 250, 700, 40, 17.5, 0, 0, 0, 63, 0, 0])
 
     def test_nutricionPercentDistribution(self):
         nutriPercentage = self.meal.getNutricionPercentDistibution()
