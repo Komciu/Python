@@ -34,7 +34,7 @@ class MealTests(unittest.TestCase):
         f1.fat = 5
         f1.prot = 20
         f1.carb = 2
-        f1.portion = 150
+        f1.size = 150
         f2 = Food("ryz")
         f2.kcal = 400
         f2.fat = 10

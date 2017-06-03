@@ -17,7 +17,7 @@ class Meal:
 
     def summary(self):
         f = Food("Summary")
-        f.portion = 0
+        f.size = 0
         for food in self.ingridients:
             f.addPortion(food)
         return f
@@ -25,7 +25,7 @@ class Meal:
     def getMealNutricion(self):
         summary = self.summary()
         return [summary.name,
-                summary.portion,
+                summary.size,
                 summary.kcal,
                 summary.fat,
                 summary.fat_unsat_mono,
@@ -47,7 +47,7 @@ class Meal:
     def getNutricionPer100g(self):
         summary = self.summary()
         sum = summary.prot + summary.carb + summary.fat
-        protPer100g = round((summary.prot / (summary.portion/100)), 1)
-        carbPer100g = round((summary.carb / (summary.portion/100)), 1)
-        fatPerc100g = round((summary.fat / (summary.portion/100)), 1)
+        protPer100g = round((summary.prot / (summary.size / 100)), 1)
+        carbPer100g = round((summary.carb / (summary.size / 100)), 1)
+        fatPerc100g = round((summary.fat / (summary.size / 100)), 1)
         return [protPer100g, carbPer100g, fatPerc100g]

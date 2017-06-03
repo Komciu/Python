@@ -14,7 +14,7 @@ class FoodTests(unittest.TestCase):
     def test_addScaledPortion(self):
         f1 = Food()
         f2 = self.prepareFood()
-        f2.portion = 200
+        f2.size = 200
         f1.addPortion(f2)
         self.assertEqual(f1.kcal, 200)
 
@@ -25,13 +25,13 @@ class FoodTests(unittest.TestCase):
 
     def test_getFoodNutricionWithBiggerPortion(self):
         f = self.prepareFood()
-        f.portion = 200
+        f.size = 200
         resultWanted = ["", 200, 200, 6, 20, 6, 10, 4, 40, 10, 14]
         self.assertEqual(resultWanted, f.getFoodNutricion())
 
     def test_getFoodNutricionWithoutPortion(self):
         f = self.prepareFood()
-        f.portion = 200
+        f.size = 200
         resultWanted = ["", 100, 100, 3, 10, 3, 5, 2, 20, 5, 7]
         self.assertEqual(resultWanted, f.getFoodNutricionPer100g())
 
@@ -39,9 +39,9 @@ class FoodTests(unittest.TestCase):
         f1 = self.prepareFood()
         f2 = self.prepareFood()
         f = Food("summary")
-        f.portion = 0
+        f.size = 0
         f.addPortion(f1)
-        self.assertEqual(f.portion, 100)
+        self.assertEqual(f.size, 100)
         self.assertEqual(f.kcal, 100)
         self.assertEqual(f.carb, 20)
 
@@ -49,16 +49,16 @@ class FoodTests(unittest.TestCase):
         f1 = self.prepareFood()
         f2 = self.prepareFood()
         f = Food("summary")
-        f.portion = 0
+        f.size = 0
         f.addPortion(f1)
         f.addPortion(f2)
-        self.assertEqual(f.portion, 200)
+        self.assertEqual(f.size, 200)
         self.assertEqual(f.kcal, 200)
         self.assertEqual(f.carb, 40)
-        self.assertEqual(f1.portion, 100)
+        self.assertEqual(f1.size, 100)
         self.assertEqual(f1.kcal, 100)
         self.assertEqual(f1.carb, 20)
-        self.assertEqual(f2.portion, 100)
+        self.assertEqual(f2.size, 100)
         self.assertEqual(f2.kcal, 100)
         self.assertEqual(f2.carb, 20)
 

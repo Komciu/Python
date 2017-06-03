@@ -7,13 +7,15 @@ from Meal.Meal import Meal
 class FoodFileSystemTests(unittest.TestCase):
     def test_isFoodPresent(self):
         self.assertEqual(True, self.fdb.isPresent("Testing"))
+
+    def test_letterSizeDoesNotMatter(self):
         self.assertEqual(True, self.fdb.isPresent("TeSTinG"))
 
     def test_foodDoesNotExist(self):
         self.assertFalse(self.fdb.isPresent("test"))
 
     def test_getNutricion(self):
-        self.assertEqual(["Testing", 100, 1, 2, 3, 4, 5, 6, 7, 8, 9.10], self.fdb.getFood("testing").getFoodNutricion())
+        self.assertEqual(["Testing", 1, 100, 2, 3, 4, 5, 6, 7, 8, 9.10], self.fdb.getFood("testing").getFoodNutricion())
 
     def test_dontCrashOnLackingValues(self):
         self.assertEqual(1, self.fdb.getFood("lacking").kcal)
@@ -31,6 +33,7 @@ class FoodFileSystemTests(unittest.TestCase):
         fdb.addFood(food)
         self.assertTrue(fdb.isPresent("addedFood"))
         self.assertTrue(fdb.isPresent("addedFood2"))
+        self.assertFalse(fdb.isPresent("addedFood3"))
         os.remove("tempFoodCsv2.csv")
 
     def test_fileParameterRow(self):
@@ -53,15 +56,7 @@ class FoodFileSystemTests(unittest.TestCase):
 
     def test_savesValuesPer100g(self):
         self.fdb.saveToFile(self.meal)
-        f = open(self.kurczakPath)
-        nutriPer100gLines = []
-        relatedLines = 0
-        for line in f:
-            if(relatedLines > 0):
-                nutriPer100gLines.append(line)
-            relatedLines -= 1
-            if(line.find("Nutri in 100g:") > -1):
-                relatedLines = 3
+        nutriPer100gLines = self.loadValuesPer100g()
 
         protLine = nutriPer100gLines[0]
         carbLine = nutriPer100gLines[1]
@@ -77,7 +72,7 @@ class FoodFileSystemTests(unittest.TestCase):
         f1.fat = 5
         f1.prot = 20
         f1.carb = 2
-        f1.portion = 150
+        f1.size = 150
         f2 = Food("ryz")
         f2.kcal = 400
         f2.fat = 10
@@ -87,8 +82,21 @@ class FoodFileSystemTests(unittest.TestCase):
         meal.addFood(f2)
         return meal
 
+    def loadValuesPer100g(self):
+        nutriPer100gLines = []
+        relatedLines = 0
+        f = open(self.kurczakPath)
+        for line in f:
+            if (relatedLines > 0):
+                nutriPer100gLines.append(line)
+            relatedLines -= 1
+            if (line.find("Nutri in 100g:") > -1):
+                relatedLines = 3
+        f.close()
+        return nutriPer100gLines
+
     def setUp(self):
-        self.fdb = FoodFileSystem("TestData/testCsv.csv")
+        self.fdb = FoodFileSystem("testCsv.csv")
         self.meal = self.prepareMeal()
         self.kurczakPath = "Recipies/test_Kurczak z ryzem.txt"
 

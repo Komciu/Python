@@ -2,15 +2,15 @@ class Food:
     def __init__(self, name = ""):
         self.name = name
         self.kcal = 0
+        self.size = 100
+        self.prot = 0
         self.fat = 0
         self.fat_unsat_mono = 0
         self.fat_unsat_bi = 0
         self.fat_sat = 0
-        self.prot = 0
         self.carb = 0
         self.carb_sugar = 0
         self.fiber = 0
-        self.portion = 100
 
     def __add__(self, other):
         self.kcal += other.kcal
@@ -38,13 +38,13 @@ class Food:
 
     def addPortion(self, other):
         self.__add__(other.scalePortion())
-        self.portion += other.portion
+        self.size += other.size
 
     def getFoodNutricion(self):
         entirePortion = self.scalePortion()
         return [self.name,
-                self.portion,
                 entirePortion.kcal,
+                self.size,
                 entirePortion.prot,
                 entirePortion.fat,
                 entirePortion.fat_sat,
@@ -69,13 +69,13 @@ class Food:
 
     def scalePortion(self):
         entirePortion = Food(self.name)
-        entirePortion.kcal = self.kcal * self.portion/100
-        entirePortion.fat = self.fat * self.portion/100
-        entirePortion.fat_unsat_mono = self.fat_unsat_mono * self.portion/100
-        entirePortion.fat_unsat_bi = self.fat_unsat_bi * self.portion/100
-        entirePortion.fat_sat = self.fat_sat * self.portion/100
-        entirePortion.prot = self.prot * self.portion/100
-        entirePortion.carb = self.carb * self.portion/100
-        entirePortion.carb_sugar = self.carb_sugar * self.portion/100
-        entirePortion.fiber = self.fiber * self.portion/100
+        entirePortion.kcal = self.kcal * self.size / 100
+        entirePortion.fat = self.fat * self.size / 100
+        entirePortion.fat_unsat_mono = self.fat_unsat_mono * self.size / 100
+        entirePortion.fat_unsat_bi = self.fat_unsat_bi * self.size / 100
+        entirePortion.fat_sat = self.fat_sat * self.size / 100
+        entirePortion.prot = self.prot * self.size / 100
+        entirePortion.carb = self.carb * self.size / 100
+        entirePortion.carb_sugar = self.carb_sugar * self.size / 100
+        entirePortion.fiber = self.fiber * self.size / 100
         return entirePortion
