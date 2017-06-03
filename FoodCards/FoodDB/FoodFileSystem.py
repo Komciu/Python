@@ -5,9 +5,9 @@ from TextFormatter.TextFormatter import TextFormatter
 class FoodFileSystem:
     def __init__(self, path):
         self.filePath = path
-        self.ensureFileExists(self.filePath)
+        self.__ensureFileExists(self.filePath)
 
-    def isPresent(self, name):
+    def isFoodPresent(self, name):
         name += ';'
         if(self.findFood(name) != None):
             return True
@@ -54,14 +54,15 @@ class FoodFileSystem:
             file.write(csvFoodLine)
 
     def saveToFile(self, meal):
-        self.ensureDirectoryExists("Recipies")
+        self.__ensureDirectoryExists("Recipies")
         filePath = "Recipies/" + meal.name + ".txt"
         file = open(filePath, 'w')
 
         file.write(meal.name + '\n')
         file.write(' \n')
         lf = TextFormatter(8)
-        columnNames = ["size", "kcal", "fat", "fatS", "fatUsM", "fatUsB", "prot", "carb", "carbS", "fiber"]
+        columnNames = ["size", "kcal", "prot" ,"fat", "fatS",
+                       "fatUsM", "fatUsB", "carb", "carbS", "fiber"]
         line = lf.createColumnNames(columnNames)
         file.write(line)
         for ingr in meal.ingridients:
@@ -71,19 +72,22 @@ class FoodFileSystem:
         file.write(lf.createColumnValues(meal.getMealNutricion()))
 
         distr = meal.getNutricionPercentDistibution()
-        file.write('\n' + "% distribution:\nprot:\t" + str(distr[0]) + "\ncarb:\t" + str(distr[1]) + "\nfat: \t" + str(distr[2]) + '\n')
+        file.write('\n' + "% distribution:\nprot:\t" + str(distr[0]) + "\ncarb:\t" +
+                   str(distr[1]) + "\nfat: \t" + str(distr[2]) + '\n')
 
         nutriPer100g = meal.getNutricionPer100g()
-        file.write('\n' + "Nutri in 100g:\nprot:\t" + str(nutriPer100g[0]) + "g\ncarb:\t" + str(nutriPer100g[1]) + "g\nfat: \t" + str(nutriPer100g[2]) +'g\n')
+        file.write('\n' + "Nutri in 100g:\nprot:\t" + str(nutriPer100g[0]) +
+                   "g\ncarb:\t" + str(nutriPer100g[1]) + "g\nfat: \t" +
+                   str(nutriPer100g[2]) +'g\n')
 
         file.close()
 
-    def ensureDirectoryExists(self, name):
+    def __ensureDirectoryExists(self, name):
         dir = os.path.dirname(name)
         if(not os.path.exists(name)):
             os.makedirs(name)
 
-    def ensureFileExists(self, path):
+    def __ensureFileExists(self, path):
         if(not os.path.isfile(path)):
             file = open(path, 'x')
             file.close()

@@ -6,16 +6,17 @@ from Meal.Meal import Meal
 
 class FoodFileSystemTests(unittest.TestCase):
     def test_isFoodPresent(self):
-        self.assertEqual(True, self.fdb.isPresent("Testing"))
+        self.assertEqual(True, self.fdb.isFoodPresent("Testing"))
 
     def test_letterSizeDoesNotMatter(self):
-        self.assertEqual(True, self.fdb.isPresent("TeSTinG"))
+        self.assertEqual(True, self.fdb.isFoodPresent("TeSTinG"))
 
     def test_foodDoesNotExist(self):
-        self.assertFalse(self.fdb.isPresent("test"))
+        self.assertFalse(self.fdb.isFoodPresent("test"))
 
     def test_getNutricion(self):
-        self.assertEqual(["Testing", 1, 100, 2, 3, 4, 5, 6, 7, 8, 9.10], self.fdb.getFood("testing").getFoodNutricion())
+        self.assertEqual(["Testing", 1, 100, 2, 3, 4, 5, 6, 7, 8, 9.10],
+                         self.fdb.getFood("testing").getFoodNutricion())
 
     def test_dontCrashOnLackingValues(self):
         self.assertEqual(1, self.fdb.getFood("lacking").kcal)
@@ -31,9 +32,9 @@ class FoodFileSystemTests(unittest.TestCase):
         fdb.addFood(food)
         food = Food("addedFood2")
         fdb.addFood(food)
-        self.assertTrue(fdb.isPresent("addedFood"))
-        self.assertTrue(fdb.isPresent("addedFood2"))
-        self.assertFalse(fdb.isPresent("addedFood3"))
+        self.assertTrue(fdb.isFoodPresent("addedFood"))
+        self.assertTrue(fdb.isFoodPresent("addedFood2"))
+        self.assertFalse(fdb.isFoodPresent("addedFood3"))
         os.remove("tempFoodCsv2.csv")
 
     def test_fileParameterRow(self):
@@ -45,7 +46,10 @@ class FoodFileSystemTests(unittest.TestCase):
 
         line = f.readline()
         f.close()
-        self.assertEqual(line, "                size    kcal    fat     fatS    fatUsM  fatUsB  prot    carb    carbS   fiber   \n")
+        refLine = "                " \
+                  "size    kcal    prot    fat     fatS    " \
+                  "fatUsM  fatUsB  carb    carbS   fiber   \n"
+        self.assertEqual(line, refLine)
 
     def test_saveMealToFileAndCheckTitle(self):
         self.fdb.saveToFile(self.meal)

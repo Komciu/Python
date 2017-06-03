@@ -24,7 +24,7 @@ class UI:
         ingr = Food(name)
         portion = int(input("Podaj rozmiar porcji: "))
         ingr.size = portion
-        if(self.fdb.isPresent(name)):
+        if(self.fdb.isFoodPresent(name)):
             ingr = self.fdb.findFood(name)
             ingr.portion = portion
         else:

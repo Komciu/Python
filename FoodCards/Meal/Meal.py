@@ -27,11 +27,11 @@ class Meal:
         return [summary.name,
                 summary.size,
                 summary.kcal,
+                summary.prot,
                 summary.fat,
                 summary.fat_unsat_mono,
                 summary.fat_unsat_bi,
                 summary.fat_sat,
-                summary.prot,
                 summary.carb,
                 summary.carb_sugar,
                 summary.fiber]
