@@ -15,7 +15,7 @@ class FoodFileSystemTests(unittest.TestCase):
         self.assertFalse(self.fdb.isFoodPresent("test"))
 
     def test_getNutricion(self):
-        self.assertEqual(["Testing", 1, 100, 2, 3, 4, 5, 6, 7, 8, 9.10],
+        self.assertEqual(["Testing", 100, 1, 2, 3, 4, 5, 6, 7, 8, 9.10],
                          self.fdb.getFood("testing").getFoodNutricion())
 
     def test_dontCrashOnLackingValues(self):

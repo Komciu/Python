@@ -22,11 +22,11 @@ class UI:
     def createIngridient(self):
         name = input("Podaj nazwe skladnika: ")
         ingr = Food(name)
-        portion = int(input("Podaj rozmiar porcji: "))
-        ingr.size = portion
+        size = int(input("Podaj rozmiar porcji: "))
+        ingr.size = size
         if(self.fdb.isFoodPresent(name)):
             ingr = self.fdb.findFood(name)
-            ingr.portion = portion
+            ingr.size = size
         else:
             kcal = self.safeFloatInput("Podaj ilosc kilokalorii: ")
             ingr.kcal = kcal

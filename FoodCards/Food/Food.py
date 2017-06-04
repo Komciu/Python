@@ -43,29 +43,29 @@ class Food:
     def getFoodNutricion(self):
         entirePortion = self.scalePortion()
         return [self.name,
-                entirePortion.kcal,
                 self.size,
-                entirePortion.prot,
-                entirePortion.fat,
-                entirePortion.fat_sat,
-                entirePortion.fat_unsat_mono,
-                entirePortion.fat_unsat_bi,
-                entirePortion.carb,
-                entirePortion.carb_sugar,
-                entirePortion.fiber]
+                round(entirePortion.kcal, 1),
+                round(entirePortion.prot, 1),
+                round(entirePortion.fat, 1),
+                round(entirePortion.fat_sat, 1),
+                round(entirePortion.fat_unsat_mono, 1),
+                round(entirePortion.fat_unsat_bi, 1),
+                round(entirePortion.carb, 1),
+                round(entirePortion.carb_sugar, 1),
+                round(entirePortion.fiber, 1)]
 
     def getFoodNutricionPer100g(self):
         return [self.name,
                 100,
-                self.kcal,
-                self.prot,
-                self.fat,
-                self.fat_sat,
-                self.fat_unsat_mono,
-                self.fat_unsat_bi,
-                self.carb,
-                self.carb_sugar,
-                self.fiber]
+                round(self.kcal, 1),
+                round(self.prot, 1),
+                round(self.fat, 1),
+                round(self.fat_sat, 1),
+                round(self.fat_unsat_mono, 1),
+                round(self.fat_unsat_bi, 1),
+                round(self.carb, 1),
+                round(self.carb_sugar, 1),
+                round(self.fiber, 1)]
 
     def scalePortion(self):
         entirePortion = Food(self.name)

@@ -14,13 +14,13 @@ class FoodFileSystem:
         else:
             return False
 
-    def findFood(self, name):
+    def findFood(self, wantedName):
         food = None
         file = open(self.filePath)
         for line in file:
             lineLower = line.lower()
-            nameLower = name.lower()
-            if (lineLower.find(nameLower) > -1):
+            wantedName = wantedName.lower()
+            if (lineLower.find(wantedName) > -1):
                 food = self.loadFood(line)
                 break
         file.close()
