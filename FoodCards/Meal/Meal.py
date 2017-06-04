@@ -22,19 +22,19 @@ class Meal:
             f.addPortion(food)
         return f
 
-    def getMealNutricion(self):
+    def getMealSummary(self):
         summary = self.summary()
         return [summary.name,
                 summary.size,
-                summary.kcal,
-                summary.prot,
-                summary.fat,
-                summary.fat_unsat_mono,
-                summary.fat_unsat_bi,
-                summary.fat_sat,
-                summary.carb,
-                summary.carb_sugar,
-                summary.fiber]
+                round(summary.kcal, 1),
+                round(summary.prot, 1),
+                round(summary.fat, 1),
+                round(summary.fat_unsat_mono, 1),
+                round(summary.fat_unsat_bi, 1),
+                round(summary.fat_sat, 1),
+                round(summary.carb, 1),
+                round(summary.carb_sugar, 1),
+                round(summary.fiber, 1)]
 
     def getNutricionPercentDistibution(self):
         summary = self.summary()
