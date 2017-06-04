@@ -15,13 +15,13 @@ class MealTests(unittest.TestCase):
         self.assertEqual(700, self.meal.summary().kcal)
 
     def test_mealNutricion(self):
-        nutri = self.meal.getMealNutricion()
+        nutri = self.meal.getMealSummary()
         self.assertEqual(nutri, ["Summary", 250, 700, 40, 17.5, 0, 0, 0, 63, 0, 0])
 
     def test_mealNutricionDoubleSummaryNotAddingUp(self):
-        nutri = self.meal.getMealNutricion()
+        nutri = self.meal.getMealSummary()
         self.assertEqual(nutri, ["Summary", 250, 700, 40, 17.5, 0, 0, 0, 63, 0, 0])
-        nutri = self.meal.getMealNutricion()
+        nutri = self.meal.getMealSummary()
         self.assertEqual(nutri, ["Summary", 250, 700, 40, 17.5, 0, 0, 0, 63, 0, 0])
 
     def test_nutricionPercentDistribution(self):

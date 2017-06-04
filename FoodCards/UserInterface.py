@@ -8,7 +8,7 @@ class UI:
 
     def start(self):
         meal = self.createMeal()
-        self.fdb = FoodFileSystem("Data/nutricion.csv")
+        self.fdb = FoodFileSystem("Data/nutricion.csv", 12)
         meal.addFood(self.createIngridient())
         while(input("Starczy?") != ('tak' or 't')):
             meal.addFood(self.createIngridient())
