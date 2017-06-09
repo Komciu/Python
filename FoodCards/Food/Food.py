@@ -36,6 +36,21 @@ class Food:
         self.fiber *= multi
         return self
 
+    def __eq__(self, other):
+        result = False
+        if(other != None and
+           self.kcal == other.kcal and
+           self.prot == other.prot and
+           self.fat == other.fat and
+           self.fat_sat == other.fat_sat and
+           self.fat_unsat_mono == other.fat_unsat_mono and
+           self.fat_unsat_bi == other.fat_unsat_bi and
+           self.carb == other.carb and
+           self.carb_sugar == other.carb_sugar and
+           self.fiber == other.fiber):
+            result = True
+        return result
+
     def addPortion(self, other):
         self.__add__(other.scalePortion())
         self.portion += other.portion

@@ -62,6 +62,12 @@ class FoodTests(unittest.TestCase):
         self.assertEqual(f2.kcal, 100)
         self.assertEqual(f2.carb, 20)
 
+    def test_comparision(self):
+        f1 = self.prepareFood()
+        f2 = self.prepareFood()
+
+        self.assertTrue(f1 == f2)
+
 
     def prepareFood(self):
         f = Food("")
